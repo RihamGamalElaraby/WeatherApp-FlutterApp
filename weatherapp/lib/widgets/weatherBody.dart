@@ -1,21 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:weatherapp/cubits/getWeatherCubit/getWeatherCubit.dart';
 
-class WheatherBody extends StatelessWidget {
-  const WheatherBody({super.key});
+class WeatherBody extends StatelessWidget {
+  const WeatherBody({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
+    var model = BlocProvider.of<GetWeatherCubit>(context).model;
+    model!.icon.contains('https');
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            'Alexandira',
+            model!.cityName,
             style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
           ),
           Text(
-            'Updated at 23:46',
+            'Updated at ${model.date.hour}:${model.date.minute}',
             style: TextStyle(fontSize: 20),
           ),
           SizedBox(
@@ -24,19 +30,19 @@ class WheatherBody extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Image.asset('assets/images/cloudy.png'),
+              Image.network("https:${model.icon}"),
               Text(
-                '17',
+                '${model.temp}',
                 style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
               ),
               Column(
                 children: [
                   Text(
-                    'Maxtemp: 24',
+                    'Maxtemp: ${model.maxTemp.round()}',
                     style: TextStyle(fontSize: 16),
                   ),
                   Text(
-                    'Mintemp: 16',
+                    'Mintemp: ${model.minTemp.round()}',
                     style: TextStyle(fontSize: 16),
                   ),
                 ],
@@ -44,7 +50,7 @@ class WheatherBody extends StatelessWidget {
             ],
           ),
           Text(
-            'Light Rain',
+            model.weatherStateName,
             style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
           ),
         ],
@@ -52,3 +58,7 @@ class WheatherBody extends StatelessWidget {
     );
   }
 }
+
+// DateTime stringtoDateTime(String value) {
+//   return DateTime.parse(value);
+// }

@@ -2,6 +2,12 @@ class getWeatherStates {}
 
 class NoWeatherState extends getWeatherStates {}
 
-class WeatherLoadingState extends getWeatherStates {}
+class WeatherLoadedState extends getWeatherStates {
+  // final WeatherModel model;
+  // WeatherLoadedState(this.model);
+}
 
-class WeatherFailureState extends getWeatherStates {}
+class WeatherFailureState extends getWeatherStates {
+  final String errMessage;
+  WeatherFailureState(this.errMessage);
+}
