@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:weatherapp/widgets/weatherBody.dart';
+import 'package:weatherapp/widgets/noWeatherBody.dart';
 
 import 'searchView.dart';
 
@@ -33,7 +33,7 @@ class HomeView extends StatelessWidget {
           ),
         ),
       ),
-      body: WheatherBody(),
+      body: NoWeatherBody(),
     );
   }
 }

@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 
 class SearchView extends StatelessWidget {
@@ -16,8 +14,11 @@ class SearchView extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(10.0),
           child: TextField(
-            onSubmitted: (value) {
-              log(value);
+            onSubmitted: (value) async {
+              // wathermodel = await WeatherService().getWeather(cityName: value);
+              // Navigator.of(context).pop();
+              // log(value);
+              // log(wathermodel!.minTemp.toString());
             },
             // onChanged: (value) {
             //   log(value);

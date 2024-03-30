@@ -1,32 +1,25 @@
 class WeatherModel {
-  final String? cityname;
-  final String? date;
-  final String? image;
-  final double? temp;
-  final double? maxTemp;
-  final double? minTemp;
-  final String? weatherCondition;
+  DateTime date;
+  double temp;
+  double maxTemp;
+  double minTemp;
+  String weatherStateName;
 
-  WeatherModel({
-    this.cityname,
-    this.date,
-    this.image,
-    this.maxTemp,
-    this.minTemp,
-    this.temp,
-    this.weatherCondition,
-  });
+  WeatherModel(
+      {required this.date,
+      required this.temp,
+      required this.maxTemp,
+      required this.minTemp,
+      required this.weatherStateName});
 
-  factory WeatherModel.fromJson(Map<String, dynamic> json) {
+  factory WeatherModel.fromJson(dynamic data) {
+    var jsonData = data['forecast']['forecastday'][0]['day'];
+
     return WeatherModel(
-      cityname: json["Location"]["name"],
-      date: json["current"]["last_updated"],
-      image: json["forecast"]["forecastday"][0]["day"]["condition"]["icon"],
-      temp: json["forecast"]["forecastday"][0]["day"]["avgtemp_c"],
-      maxTemp: json["forecast"]["forecastday"][0]["day"]["maxtemp_c"],
-      minTemp: json["forecast"]["forecastday"][0]["day"]["mintemp_c"],
-      weatherCondition: json["forecast"]["forecastday"][0]["day"]["condition"]
-          ["text"],
-    );
+        date: DateTime.parse(data['current']['last_updated']),
+        temp: jsonData['avgtemp_c'],
+        maxTemp: jsonData['maxtemp_c'],
+        minTemp: jsonData['mintemp_c'],
+        weatherStateName: jsonData['condition']['text']);
   }
 }

@@ -1,20 +1,25 @@
-import 'package:dio/dio.dart';
+import 'dart:convert';
+
+import 'package:http/http.dart' as http;
 import 'package:weatherapp/models/weatherModel.dart';
 
 class WeatherService {
-  final Dio dio;
-  final String baseUrl = 'https://api.weatherapi.com/v1';
-  final String apiKey = '15b5c0c284714eb6abe31525242703';
+  String baseUrl = 'http://api.weatherapi.com/v1';
 
-  WeatherService(this.dio);
-  Future<WeatherModel?> getCurrentWeather({required String cityName}) async {
-    try {
-      Response response = await dio
-          .get('$baseUrl/forecast.json?key=$apiKey&q=$cityName&days=1');
-      WeatherModel weatherModel = WeatherModel.fromJson(response.data);
-      return weatherModel;
-    } on Exception catch (e) {
-      return null;
+  String apiKey = '15b5c0c284714eb6abe31525242703';
+  Future<WeatherModel> getWeather({required String cityName}) async {
+    Uri url =
+        Uri.parse('$baseUrl/forecast.json?key=$apiKey&q=$cityName&days=7');
+    http.Response response = await http.get(url);
+
+    if (response.statusCode == 400) {
+      var data = jsonDecode(response.body);
+      throw Exception(data['error']['message']);
     }
+    Map<String, dynamic> data = jsonDecode(response.body);
+
+    WeatherModel weather = WeatherModel.fromJson(data);
+
+    return weather;
   }
 }
