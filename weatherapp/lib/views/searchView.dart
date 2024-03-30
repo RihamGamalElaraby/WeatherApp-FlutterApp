@@ -9,7 +9,8 @@ class SearchView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Search a city', style: TextStyle(color: Colors.black)),
+        title:
+            const Text('Search a city', style: TextStyle(color: Colors.black)),
       ),
       body: Center(
         child: Padding(
@@ -21,23 +22,23 @@ class SearchView extends StatelessWidget {
               Navigator.of(context).pop();
             },
             decoration: InputDecoration(
-              suffixIcon: Icon(Icons.search),
+              suffixIcon: const Icon(Icons.search),
               suffixIconColor: Colors.black,
               labelText: 'Search',
               hintText: 'Enter city here',
-              hintStyle: TextStyle(color: Colors.black),
-              labelStyle: TextStyle(color: Colors.black),
+              hintStyle: const TextStyle(color: Colors.black),
+              labelStyle: const TextStyle(color: Colors.black),
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(15),
-                borderSide: BorderSide(color: Colors.yellow),
+                // borderSide: const BorderSide(color: Colors.yellow),
               ),
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(15),
-                borderSide: BorderSide(color: Colors.yellow),
+                // borderSide: const BorderSide(color: Colors.yellow),
               ),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(15),
-                borderSide: BorderSide(color: Colors.yellow),
+                borderSide: const BorderSide(color: Colors.yellow),
               ),
             ),
           ),
